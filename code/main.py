@@ -56,6 +56,8 @@ background = pygame.image.load('../images/desert theme.png')
 background = pygame.transform.scale(background,(dimensions.current_w,dimensions.current_h))
 background_rect = background.get_rect(
 			centerx=(int(dimensions.current_w / 2)),bottom = int(dimensions.current_h))
+
+
 backicon1 = pygame.image.load('../images/backicon.png')
 backicon1 = pygame.transform.scale(backicon1,(int((50/1280)*dimensions.current_w),int((57/720)*dimensions.current_h)))
 backicon2 = pygame.image.load('../images/backicon2.png')
@@ -63,6 +65,16 @@ backicon2 = pygame.transform.scale(backicon2,(int((55/1280)*dimensions.current_w
 backicon = [backicon1,backicon2]
 backicon_index = 0
 backicon_rect = backicon[backicon_index].get_rect(left = int((10/1280)*dimensions.current_w), top = int((5/720)*dimensions.current_h))
+
+
+backb1 = pygame.image.load('../images/backb.png')
+backb2 = pygame.transform.scale(backb1,(int((90/1280)*dimensions.current_w),int((90/720)*dimensions.current_h)))
+bi = 0
+backb = [backb1,backb2]
+backb_rect = backb[bi].get_rect(center = (int((50/1280)*dimensions.current_w),int((50/720)*dimensions.current_h)))
+
+
+
 d_p1 = pygame.image.load('../images/plank.png')
 d_p1 = pygame.transform.scale(d_p1,(int((250/1280)*dimensions.current_w),int((29/720)*dimensions.current_h)))
 d_p1_rect = d_p1.get_rect(left = int(0.05*dimensions.current_w),top = int(0.3*dimensions.current_h))
@@ -154,12 +166,12 @@ left_arrow = [left_arrow1,left_arrow2]
 lindex = 0
 left_arrow_rect = left_arrow[lindex].get_rect(left = int((80/1280)*dimensions.current_w), centery = int((300/720)*dimensions.current_h))
 
-# start_button0 = pygame.image.load('../images/start button.png')
-# start_button1 = pygame.transform.scale(start_button0,(int((200/1280)*dimensions.current_w),int((114/720)*dimensions.current_h)))
-# start_button2 = pygame.transform.scale(start_button1,(int((250/1280)*dimensions.current_w),int((164/720)*dimensions.current_h)))
-# start_button = [start_button1,start_button2]
-# sindex = 0
-# start_button_rect = start_button[sindex].get_rect(center = (int(dimensions.current_w/6), int(dimensions.current_h*(2/3))))
+start_button0 = pygame.image.load('../images/start button.png')
+start_button1 = pygame.transform.scale(start_button0,(int((200/1280)*dimensions.current_w),int((114/720)*dimensions.current_h)))
+start_button2 = pygame.transform.scale(start_button1,(int((250/1280)*dimensions.current_w),int((164/720)*dimensions.current_h)))
+start_button = [start_button1,start_button2]
+sindex = 0
+start_button_rect = start_button[sindex].get_rect(center = (int(dimensions.current_w*0.9), int(dimensions.current_h*0.8)))
 desert_mode = pygame.image.load('../images/desert_mode.png')
 theme_list = [desert_mode]
 theme_index = 0
@@ -601,8 +613,29 @@ while True:
 			hit2 += int(1/1280 * dimensions.current_w)
 	if game_state == 'choose':
 		screen.blit(ctrl_page,ctrl_page_rect)
-		if pygame.mouse.get_pressed()[0]:
-			game_state = 'play'
+		screen.blit(start_button[sindex], start_button_rect)
+		screen.blit(backb[bi], backb_rect)
+		if backb_rect.collidepoint(pygame.mouse.get_pos()):
+			bi = 1
+			if pygame.mouse.get_pressed()[0]:
+				click.play()
+				time.sleep(1)
+				game_state = 'home_page'
+
+		else:
+			bi = 0
+		if start_button_rect.collidepoint(pygame.mouse.get_pos()):
+			sindex = 1
+			start_button_rect = start_button[sindex].get_rect(
+				center=(int(dimensions.current_w *0.9), int(dimensions.current_h * (0.8))))
+			if pygame.mouse.get_pressed()[0]:
+				click.play()
+				time.sleep(1)
+				game_state = 'play'
+		else:
+			sindex = 0
+			start_button_rect = start_button[sindex].get_rect(
+				center=(int(dimensions.current_w *0.9), int(dimensions.current_h * (0.8))))
 
 	pygame.display.update()
 	clock.tick(60)
