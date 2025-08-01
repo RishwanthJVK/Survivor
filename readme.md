@@ -7,8 +7,10 @@
 
 ![Home Screen](github_images/home_pg.png)
 
+![Gameplay](github_images/controls_pg.png)
+
 ![Gameplay](github_images/shoot_pg.png)
 
 ![Gameplay](github_images/win_guy_pg.png)
 
-![Gameplay](github_images/game_over_pg.png)
+![Gameplay](github_images/p1wins2.png)
