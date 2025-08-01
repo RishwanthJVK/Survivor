@@ -16,6 +16,29 @@ home_page = pygame.image.load("../images/home page.png")
 home_page = pygame.transform.scale(home_page,(dimensions.current_w,dimensions.current_h))
 home_page_rect = home_page.get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h/2)))
 
+ctrl_page = pygame.image.load("../images/controls.png")
+ctrl_page = pygame.transform.scale(ctrl_page,(dimensions.current_w,dimensions.current_h))
+ctrl_page_rect = ctrl_page.get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h/2)))
+
+p_index = random.randint(0,2)
+p1wins1 = pygame.image.load("../images/p1wins1.png")
+p1wins1 = pygame.transform.scale(p1wins1,(dimensions.current_w,dimensions.current_h))
+p1wins2 = pygame.image.load("../images/p1wins2.png")
+p1wins2 = pygame.transform.scale(p1wins2,(dimensions.current_w,dimensions.current_h))
+p1wins3 = pygame.image.load("../images/p1wins3.png")
+p1wins3 = pygame.transform.scale(p1wins3,(dimensions.current_w,dimensions.current_h))
+p1wins = [p1wins1,p1wins2,p1wins3]
+p1wins_rect = p1wins[p_index].get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h/2)))
+
+p2wins1 = pygame.image.load("../images/p2wins1.png")
+p2wins1 = pygame.transform.scale(p2wins1,(dimensions.current_w,dimensions.current_h))
+p2wins2 = pygame.image.load("../images/p2wins2.png")
+p2wins2 = pygame.transform.scale(p2wins2,(dimensions.current_w,dimensions.current_h))
+p2wins3 = pygame.image.load("../images/p2wins3.png")
+p2wins3 = pygame.transform.scale(p2wins3,(dimensions.current_w,dimensions.current_h))
+p2wins = [p2wins1,p2wins2,p2wins3]
+p2wins_rect = p2wins[p_index].get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h/2)))
+
 game_over = pygame.image.load("../images/gameover.png")
 game_over = pygame.transform.scale(game_over,(dimensions.current_w,dimensions.current_h))
 game_over_rect = game_over.get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h/2)))
@@ -29,18 +52,6 @@ playbutton = [playbutton1,playbutton2]
 playbutton_index = 0
 playbutton_rect = playbutton[playbutton_index].get_rect(center = (int(dimensions.current_w/2),int(dimensions.current_h*(2/3))))
 
-leaderboardicon1 = pygame.image.load('../images/leaderboardicon.png')
-leaderboardicon1 = pygame.transform.scale(leaderboardicon1,(int((150/1280)*dimensions.current_w),int((150/720)*dimensions.current_h)))
-leaderboardicon2 = pygame.transform.scale(leaderboardicon1,(int((170/1280)*dimensions.current_w),int((170/720)*dimensions.current_h)))
-leaderboardicon = [leaderboardicon1,leaderboardicon2]
-leaderboardicon_index = 0
-leaderboardicon_rect = leaderboardicon[leaderboardicon_index].get_rect(center = (int(dimensions.current_w*(1/6)),int(dimensions.current_h*(2/3))))
-settingsicon1 = pygame.image.load('../images/settingsicon.png')
-settingsicon1 = pygame.transform.scale(settingsicon1,(int((150/1280)*dimensions.current_w),int((150/720)*dimensions.current_h)))
-settingsicon2 = pygame.transform.scale(settingsicon1,(int((163/1280)*dimensions.current_w),int((163/720)*dimensions.current_h)))
-settingsicon = [settingsicon1,settingsicon2]
-settingsicon_index = 0
-settingsicon_rect = settingsicon[settingsicon_index].get_rect(center = (int(dimensions.current_w*(5/6)),int(dimensions.current_h*(2/3))))
 background = pygame.image.load('../images/desert theme.png')
 background = pygame.transform.scale(background,(dimensions.current_w,dimensions.current_h))
 background_rect = background.get_rect(
@@ -142,11 +153,13 @@ left_arrow2 = pygame.transform.scale(left_arrow1,(int((250/1280)*dimensions.curr
 left_arrow = [left_arrow1,left_arrow2]
 lindex = 0
 left_arrow_rect = left_arrow[lindex].get_rect(left = int((80/1280)*dimensions.current_w), centery = int((300/720)*dimensions.current_h))
-start_button1 = pygame.image.load('../images/start button.png')
-start_button2 = pygame.transform.scale(start_button1,(int((400/1280)*dimensions.current_w),int((227/720)*dimensions.current_h)))
-start_button = [start_button1,start_button2]
-sindex = 0
-start_button_rect = start_button[sindex].get_rect(center = (int((640/1280)*dimensions.current_w), int((560/720)*dimensions.current_h)))
+
+# start_button0 = pygame.image.load('../images/start button.png')
+# start_button1 = pygame.transform.scale(start_button0,(int((200/1280)*dimensions.current_w),int((114/720)*dimensions.current_h)))
+# start_button2 = pygame.transform.scale(start_button1,(int((250/1280)*dimensions.current_w),int((164/720)*dimensions.current_h)))
+# start_button = [start_button1,start_button2]
+# sindex = 0
+# start_button_rect = start_button[sindex].get_rect(center = (int(dimensions.current_w/6), int(dimensions.current_h*(2/3))))
 desert_mode = pygame.image.load('../images/desert_mode.png')
 theme_list = [desert_mode]
 theme_index = 0
@@ -168,6 +181,7 @@ shoot_sound.set_volume(0.5)
 hitting_sound = pygame.mixer.Sound('../audio/hit sound.wav')
 
 #functional_variables
+start_time = 0
 game_state = 'home_page'
 fall_1 = 0
 ground_1 = False
@@ -249,7 +263,7 @@ class Player(pygame.sprite.Sprite):
 					rrun_index_1 = 0
 			if not ground_1:
 				self.image = jump_f1
-			self.rect.x += int(6/1280 * dimensions.current_w)
+			self.rect.x += int(10/1280 * dimensions.current_w)
 		if keys[pygame.K_a]:
 			if facing_1:
 				jump_f1 = j_1[0]
@@ -262,7 +276,7 @@ class Player(pygame.sprite.Sprite):
 					run_index_1 = 0
 			if not ground_1:
 				self.image = jump_f1
-			self.rect.x -= int(6/1280 * dimensions.current_w)
+			self.rect.x -= int(10/1280 * dimensions.current_w)
 		if keys[pygame.K_w] and ground_1:
 			jump.play()
 			if facing_1:
@@ -333,7 +347,7 @@ class Player2(pygame.sprite.Sprite):
 					rrun_index_2 = 0
 			if not ground_2:
 				self.image = jump_f2
-			self.rect.x += int(5/1280 * dimensions.current_w)
+			self.rect.x += int(10/1280 * dimensions.current_w)
 		if keys[pygame.K_LEFT]:
 			if facing_2:
 				jump_f2 = j_2[0]
@@ -346,7 +360,7 @@ class Player2(pygame.sprite.Sprite):
 					run_index_2 = 0
 			if not ground_2:
 				self.image = jump_f2
-			self.rect.x -= int(5/1280 * dimensions.current_w)
+			self.rect.x -= int(10/1280 * dimensions.current_w)
 		if keys[pygame.K_UP] and ground_2:
 			jump.play()
 			if facing_2:
@@ -453,8 +467,6 @@ while True:
 		pygame.mixer.music.set_volume(0.5)
 		screen.blit(home_page, home_page_rect)
 		screen.blit(playbutton[playbutton_index],playbutton_rect)
-		screen.blit(leaderboardicon[leaderboardicon_index],leaderboardicon_rect)
-		screen.blit(settingsicon[settingsicon_index],settingsicon_rect)
 		screen.blit(big,big_rect)
 		if playbutton_rect.collidepoint(pygame.mouse.get_pos()):
 			playbutton_index = 1
@@ -487,26 +499,14 @@ while True:
 			playbutton_index = 0
 			playbutton_rect = playbutton[playbutton_index].get_rect(
 				center=(int(dimensions.current_w / 2), int(dimensions.current_h * (2 / 3))))
-		if leaderboardicon_rect.collidepoint(pygame.mouse.get_pos()):
-			leaderboardicon_index = 1
-			leaderboardicon_rect = leaderboardicon[leaderboardicon_index].get_rect(
-				center=(int(dimensions.current_w * (1 / 6)), int(dimensions.current_h * (2 / 3))))
-		else:
-			leaderboardicon_index = 0
-			leaderboardicon_rect = leaderboardicon[leaderboardicon_index].get_rect(
-				center=(int(dimensions.current_w * (1 / 6)), int(dimensions.current_h * (2 / 3))))
-		if settingsicon_rect.collidepoint(pygame.mouse.get_pos()):
-			settingsicon_index = 1
-			settingsicon_rect = settingsicon[settingsicon_index].get_rect(
-				center=(int(dimensions.current_w * (5 / 6)), int(dimensions.current_h * (2 / 3))))
-		else:
-			settingsicon_index = 0
-			settingsicon_rect = settingsicon[settingsicon_index].get_rect(
-				center=(int(dimensions.current_w * (5 / 6)), int(dimensions.current_h * (2 / 3))))
 	if game_state == 'game_end':
-		screen.blit(game_over,game_over_rect)
-		if pygame.mouse.get_pressed()[0]:
-			game_state = 'home_page'
+		if birth_2 == 0:
+			screen.blit(p1wins[p_index], p1wins_rect)
+		else:
+			screen.blit(p2wins[p_index], p2wins_rect)
+		current_time = pygame.time.get_ticks()
+		if (current_time - start_time) >= 5000:
+			game_state = "home_page"
 
 
 	if game_state == 'play':
@@ -535,7 +535,7 @@ while True:
 			if pygame.mouse.get_pressed()[0]:
 				click.play()
 				time.sleep(1)
-				game_state = 'choose'
+				game_state = 'home_page'
 
 		else:
 			backicon_index = 0
@@ -582,6 +582,8 @@ while True:
 		else:
 			ground_2 = False
 		if not birth_1 or not birth_2:
+			p_index = random.randint(0, 2)
+			start_time = pygame.time.get_ticks()
 			game_state = 'game_end'
 		bullet_list_1 = shoot(bullet_list_1)
 		bullet_list_2 = shoot(bullet_list_2)
@@ -598,51 +600,9 @@ while True:
 		elif hit2 < 0:
 			hit2 += int(1/1280 * dimensions.current_w)
 	if game_state == 'choose':
-		screen.blit(home_page,home_page_rect)
-		screen.blit(right_arrow[rindex],right_arrow_rect)
-		screen.blit(left_arrow[lindex],left_arrow_rect)
-		screen.blit(start_button[sindex], start_button_rect)
-		screen.blit(theme_list[theme_index],theme_rect)
-		screen.blit(backb[bi],backb_rect)
-		if right_arrow_rect.collidepoint(pygame.mouse.get_pos()):
-			rindex = 1
-			right_arrow_rect = right_arrow[rindex].get_rect(right=int((1200 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
-			if pygame.mouse.get_pressed()[0]:
-				click.play()
-		else:
-			rindex = 0
-			right_arrow_rect = right_arrow[rindex].get_rect(right=int((1200 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
-		if left_arrow_rect.collidepoint(pygame.mouse.get_pos()):
-			lindex = 1
-			left_arrow_rect = left_arrow[lindex].get_rect(left=int((80 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
-			if pygame.mouse.get_pressed()[0]:
-				click.play()
-		else:
-			lindex = 0
-			left_arrow_rect = left_arrow[lindex].get_rect(left=int((80 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
-		if start_button_rect.collidepoint(pygame.mouse.get_pos()):
-			sindex = 1
-
-			start_button_rect = start_button[sindex].get_rect(center=(int((640 / 1280) * dimensions.current_w), int((560 / 720) * dimensions.current_h)))
-			if pygame.mouse.get_pressed()[0]:
-				click.play()
-				time.sleep(1)
-				game_state = 'play'
-		else:
-			sindex = 0
-			start_button_rect = start_button[sindex].get_rect(center=(int((640 / 1280) * dimensions.current_w), int((560 / 720) * dimensions.current_h)))
-		if backb_rect.collidepoint(pygame.mouse.get_pos()) and game_state == 'choose':
-			bi = 1
-			backb_rect = backb[bi].get_rect(center = (int((50 / 1280) * dimensions.current_w),int((50 / 720) * dimensions.current_h)))
-			if pygame.mouse.get_pressed()[0] and game_state == 'choose':
-				click.play()
-				time.sleep(1)
-				game_state = 'home_page'
-		else:
-			bi = 0
-			backb_rect = backb[bi].get_rect(center=(int((50 / 1280) * dimensions.current_w), int((50 / 720) * dimensions.current_h)))
-
-
+		screen.blit(ctrl_page,ctrl_page_rect)
+		if pygame.mouse.get_pressed()[0]:
+			game_state = 'play'
 
 	pygame.display.update()
 	clock.tick(60)
