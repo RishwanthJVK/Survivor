@@ -133,20 +133,30 @@ rjump_2 = pygame.transform.flip(jump_2,True,False)
 j_2 = [jump_2,rjump_2]
 jump_f2 = j_2[0]
 right_arrow1 = pygame.image.load('../images/right arrow.png')
-right_arrow2 = pygame.transform.scale(right_arrow1,(250,250))
+right_arrow2 = pygame.transform.scale(right_arrow1,(int((250/1280)*dimensions.current_w),int((250/720)*dimensions.current_h)))
 right_arrow = [right_arrow1,right_arrow2]
 rindex = 0
-right_arrow_rect = right_arrow[rindex].get_rect(right = 1200, centery = 300)
+right_arrow_rect = right_arrow[rindex].get_rect(right = int((1200/1280)*dimensions.current_w), centery = int((300/720)*dimensions.current_h))
 left_arrow1 = pygame.image.load('../images/left arrow.png')
-left_arrow2 = pygame.transform.scale(left_arrow1,(250,250))
+left_arrow2 = pygame.transform.scale(left_arrow1,(int((250/1280)*dimensions.current_w),int((250/720)*dimensions.current_h)))
 left_arrow = [left_arrow1,left_arrow2]
 lindex = 0
-left_arrow_rect = left_arrow[lindex].get_rect(left = 80, centery = 300)
+left_arrow_rect = left_arrow[lindex].get_rect(left = int((80/1280)*dimensions.current_w), centery = int((300/720)*dimensions.current_h))
 start_button1 = pygame.image.load('../images/start button.png')
-start_button2 = pygame.transform.scale(start_button1,(400,227))
+start_button2 = pygame.transform.scale(start_button1,(int((400/1280)*dimensions.current_w),int((227/720)*dimensions.current_h)))
 start_button = [start_button1,start_button2]
 sindex = 0
-start_button_rect = start_button[sindex].get_rect(center = (640, 560))
+start_button_rect = start_button[sindex].get_rect(center = (int((640/1280)*dimensions.current_w), int((560/720)*dimensions.current_h)))
+desert_mode = pygame.image.load('../images/desert_mode.png')
+theme_list = [desert_mode]
+theme_index = 0
+theme_rect = theme_list[theme_index].get_rect(center = (int((640/1280)*dimensions.current_w),int((300/720)*dimensions.current_h)))
+backb1 = pygame.image.load('../images/backb.png')
+backb2 = pygame.transform.scale(backb1,(int((90/1280)*dimensions.current_w),int((90/720)*dimensions.current_h)))
+bi = 0
+backb = [backb1,backb2]
+backb_rect = backb[bi].get_rect(center = (int((50/1280)*dimensions.current_w),int((50/720)*dimensions.current_h)))
+
 #audio
 theme = pygame.mixer.music.load('../audio/theme.wav')
 pygame.mixer.music.play(-1)
@@ -156,15 +166,6 @@ jump = pygame.mixer.Sound('../audio/jump sound.wav')
 shoot_sound = pygame.mixer.Sound('../audio/shooting sound.wav')
 shoot_sound.set_volume(0.5)
 hitting_sound = pygame.mixer.Sound('../audio/hit sound.wav')
-desert_mode = pygame.image.load('../images/desert_mode.png')
-theme_list = [desert_mode]
-theme_index = 0
-theme_rect = theme_list[theme_index].get_rect(center = (640,300))
-backb1 = pygame.image.load('../images/backb.png')
-backb2 = pygame.transform.scale(backb1,(90,90))
-bi = 0
-backb = [backb1,backb2]
-backb_rect = backb[bi].get_rect(center = (50,50))
 
 #functional_variables
 game_state = 'home_page'
@@ -605,40 +606,41 @@ while True:
 		screen.blit(backb[bi],backb_rect)
 		if right_arrow_rect.collidepoint(pygame.mouse.get_pos()):
 			rindex = 1
-			right_arrow_rect = right_arrow[rindex].get_rect(right=1200, centery=300)
+			right_arrow_rect = right_arrow[rindex].get_rect(right=int((1200 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
 			if pygame.mouse.get_pressed()[0]:
 				click.play()
 		else:
 			rindex = 0
-			right_arrow_rect = right_arrow[rindex].get_rect(right=1200, centery=300)
+			right_arrow_rect = right_arrow[rindex].get_rect(right=int((1200 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
 		if left_arrow_rect.collidepoint(pygame.mouse.get_pos()):
 			lindex = 1
-			left_arrow_rect = left_arrow[lindex].get_rect(left=80, centery=300)
+			left_arrow_rect = left_arrow[lindex].get_rect(left=int((80 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
 			if pygame.mouse.get_pressed()[0]:
 				click.play()
 		else:
 			lindex = 0
-			left_arrow_rect = left_arrow[lindex].get_rect(left=80, centery=300)
+			left_arrow_rect = left_arrow[lindex].get_rect(left=int((80 / 1280) * dimensions.current_w), centery=int((300 / 720) * dimensions.current_h))
 		if start_button_rect.collidepoint(pygame.mouse.get_pos()):
 			sindex = 1
-			start_button_rect = start_button[sindex].get_rect(center=(640, 560))
+
+			start_button_rect = start_button[sindex].get_rect(center=(int((640 / 1280) * dimensions.current_w), int((560 / 720) * dimensions.current_h)))
 			if pygame.mouse.get_pressed()[0]:
 				click.play()
 				time.sleep(1)
 				game_state = 'play'
 		else:
 			sindex = 0
-			start_button_rect = start_button[sindex].get_rect(center=(640, 560))
+			start_button_rect = start_button[sindex].get_rect(center=(int((640 / 1280) * dimensions.current_w), int((560 / 720) * dimensions.current_h)))
 		if backb_rect.collidepoint(pygame.mouse.get_pos()) and game_state == 'choose':
 			bi = 1
-			backb_rect = backb[bi].get_rect(center = (50,50))
+			backb_rect = backb[bi].get_rect(center = (int((50 / 1280) * dimensions.current_w),int((50 / 720) * dimensions.current_h)))
 			if pygame.mouse.get_pressed()[0] and game_state == 'choose':
 				click.play()
 				time.sleep(1)
 				game_state = 'home_page'
 		else:
 			bi = 0
-			backb_rect = backb[bi].get_rect(center=(50, 50))
+			backb_rect = backb[bi].get_rect(center=(int((50 / 1280) * dimensions.current_w), int((50 / 720) * dimensions.current_h)))
 
 
 
