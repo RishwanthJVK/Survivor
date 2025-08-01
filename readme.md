@@ -35,15 +35,11 @@ Make sure you have Python 3 & pygame installed.
 # 📁 Asset Credits
 
 🔊 Audio:
-Valorant
-Gun Mayhem
+- Valorant
+- Gun Mayhem
 
 🎨 Visuals:
+
 Character sprites & art: Freepik, Shutterstock, Adobe Stock
 
-📌 Notes
-Built for fun, learning, and pure chaos.
 
-Tested on multiple screen sizes for responsiveness.
-
-Meme generator uses a randomized selection from a local set of images.
