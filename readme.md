@@ -9,7 +9,7 @@ The twist? Each win rewards the victor with a random meme, keeping the chaos fun
 
 ![Home Screen](github_images/home_pg.png)
 
-🕹 Controls
+# 🕹 Controls
 
 ![Gameplay](github_images/controls_pg.png)
 
@@ -20,22 +20,20 @@ The twist? Each win rewards the victor with a random meme, keeping the chaos fun
 ![Gameplay](images/p1wins2.png)
 
 
-✨ Features
-🧍‍♂️ Responsive 2-player mechanics on a single keyboard
 
-📸 Random meme generator triggered after each win
-
-🔫 Physics-based gun combat and platform jumping
-
-🎯 Engaging visuals with smooth screen scaling
-
-🎵 Fun audio inspired by classic shooter games
+# Features
+- Responsive 2-player mechanics on a single keyboard
+- Random meme generator triggered after each win
+- Physics-based gun combat and platform jumping
+-  Engaging visuals with smooth screen scaling
+-  Fun audio inspired by classic shooter games
 
 
-🔧 Installation
+# Installation
 Make sure you have Python 3 & pygame installed.
 
-📁 Asset Credits
+# 📁 Asset Credits
+
 🔊 Audio:
 Valorant
 Gun Mayhem
