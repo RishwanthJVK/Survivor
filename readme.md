@@ -7,7 +7,7 @@
 
 ![Home Screen](github_images/home_pg.png)
 
-![Gameplay](images/controls_pg.png)
+![Gameplay](images/controls.png)
 
 ![Gameplay](github_images/shoot_pg.png)
 
