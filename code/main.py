@@ -99,7 +99,7 @@ face_1_rect = face_1.get_rect(centery = int(life_bar1_rect.centery - (5/720)*dim
 face_2_rect = face_2.get_rect(centery = int(life_bar2_rect.centery - (5/720)*dimensions.current_h), centerx = int(life_bar2_rect.centerx - (50/1280)*dimensions.current_w))
 stand_1 = pygame.image.load('../images/player.png')
 stand_1 = pygame.transform.scale(stand_1,(int((71/1280)*dimensions.current_w),int((98/720)*dimensions.current_h)))
-stand_2 = pygame.image.load('../images/player 2.png')
+stand_2 = pygame.image.load('../images/player_2.png')
 stand_2 = pygame.transform.scale(stand_2,(int((69/1280)*dimensions.current_w),int((100/720)*dimensions.current_h)))
 run1_1 = pygame.image.load('../images/run1.png')
 run1_1 = pygame.transform.scale(run1_1,(int((90/1280)*dimensions.current_w),int((98/720)*dimensions.current_h)))
@@ -306,12 +306,12 @@ class Player(pygame.sprite.Sprite):
 				if not facing_1:
 					hit1 += int(5/1280 * dimensions.current_w)
 					bullet_list_1.append(
-						[bullet_1.get_rect(right=player_1.sprite.rect.left, centery=player_1.sprite.rect.centery),
+						[bullet_1.get_rect(right=player_1.sprite.rect.left, centery=player_1.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_1,0,1])
 				else:
 					hit1-= int(5/1280 * dimensions.current_w)
 					bullet_list_1.append(
-						[bullet_2.get_rect(left=player_1.sprite.rect.right, centery=player_1.sprite.rect.centery),
+						[bullet_2.get_rect(left=player_1.sprite.rect.right, centery=player_1.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_1,0,1])
 				wait_1 = 0
 		if not keys[pygame.K_a] and not keys[pygame.K_d] and not keys[pygame.K_s] and not keys[pygame.K_w] and ground_1:
@@ -342,7 +342,7 @@ class Player(pygame.sprite.Sprite):
 class Player2(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
-		self.image = pygame.image.load('../images/player 2.png')
+		self.image = stand_2
 		self.rect = self.image.get_rect(bottom = int(d_p1_rect.top - 100/720 * dimensions.current_h), left = random.randint(d_p3_rect.centerx,d_p4_rect.x))
 	def player_inputs(self):
 		global rrun_index_2,run_index_2, ground_2,jump_2,jump_f2,stand_2, facing_2, background_rect, d_p1_rect, d_p2_rect, d_p3_rect, d_p4_rect, fall_2,game_state, wait_2, hit2
@@ -390,12 +390,12 @@ class Player2(pygame.sprite.Sprite):
 				if not facing_2:
 					hit2+=5
 					bullet_list_2.append(
-						[bullet_1.get_rect(right=player_2.sprite.rect.left, centery=player_2.sprite.rect.centery),
+						[bullet_1.get_rect(right=player_2.sprite.rect.left, centery=player_2.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_2,0,2])
 				else:
 					hit2-=5
 					bullet_list_2.append(
-						[bullet_2.get_rect(left=player_2.sprite.rect.right, centery=player_2.sprite.rect.centery),
+						[bullet_2.get_rect(left=player_2.sprite.rect.right, centery=player_2.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_2,0,2])
 				wait_2 = 0
 		if not keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT] and not keys[pygame.K_DOWN] and not keys[pygame.K_UP] and ground_2:
@@ -456,24 +456,24 @@ while True:
 				if not facing_2:
 					hit2 += int(5/1280 * dimensions.current_w)
 					bullet_list_2.append(
-						[bullet_1.get_rect(right=player_2.sprite.rect.left, centery=player_2.sprite.rect.centery),
+						[bullet_1.get_rect(right=player_2.sprite.rect.left, centery=player_2.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_2,0,2])
 				else:
 					hit2 -= int(5/1280 * dimensions.current_w)
 					bullet_list_2.append(
-						[bullet_2.get_rect(left=player_2.sprite.rect.right, centery=player_2.sprite.rect.centery),
+						[bullet_2.get_rect(left=player_2.sprite.rect.right, centery=player_2.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_2,0,2])
 			if keys[pygame.K_v]:
 				shoot_sound.play()
 				if not facing_1:
 					hit1 += int(5/1280 * dimensions.current_w)
 					bullet_list_1.append(
-						[bullet_1.get_rect(right=player_1.sprite.rect.left, centery=player_1.sprite.rect.centery),
+						[bullet_1.get_rect(right=player_1.sprite.rect.left, centery=player_1.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_1,0,1])
 				else:
 					hit1-=int(5/1280 * dimensions.current_w)
 					bullet_list_1.append(
-						[bullet_2.get_rect(left=player_1.sprite.rect.right, centery=player_1.sprite.rect.centery),
+						[bullet_2.get_rect(left=player_1.sprite.rect.right, centery=player_1.sprite.rect.centery + (22/1280 * dimensions.current_h)),
 						 facing_1,0,1])
 	if game_state == 'home_page':
 		pygame.mixer.music.set_volume(0.5)
